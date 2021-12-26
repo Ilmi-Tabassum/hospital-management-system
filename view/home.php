@@ -3,23 +3,23 @@
 </head>
   <div>
     <p>Login As a Patient.<p>
-    <a href = "login.php"> Go to Login Page </a>
+    <a href = "patient-login.php"> Go to Login Page </a>
   </div>
 
   
   <div>
     <p>Login As a Doctor.<p>
-    <a href = "login-doc.php" > Go to Login Page </a>
+    <a href = "doctor-login.php" > Go to Login Page </a>
   </div>
 
   
   <div>
     <p>Login As a Pharmacist.<p>
-    <a href = "login-phar.php" > Go to Login Page </a>
+    <a href = "pharmacist-login.php" > Go to Login Page </a>
   </div>
 
   
   <div>
     <p>Login As a Admin.<p>
-    <a href = "login-admin.php"> Go to Login Page </a>
+    <a href = "admin-login.php"> Go to Login Page </a>
   </div>

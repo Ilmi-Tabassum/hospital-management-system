@@ -1,8 +1,8 @@
 <?php
-include('../controller/admin-controller.php');
+include('../controller/login-controller.php');
 
 if(isset($_SESSION['email'])){
-    header("location: patient-records.php");
+    header("location: doctor-panel.php");
 }
 ?>
 
@@ -29,6 +29,8 @@ if(isset($_SESSION['email'])){
         <label for="password">Password</label>
         <input type="password" placeholder="Enter Password" name="password" required>
         <!-- <input name="submit" type="submit" value="LOGIN"> -->
+        <input type="hidden" name="role" id="role" value="doctor"/>
+
         <button type="submit" input name="submit" type="submit" value="LOGIN">Login</button>
     </div>
     <a href="../controller/logout.php" class="button">Log Out</a>

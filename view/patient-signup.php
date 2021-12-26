@@ -1,6 +1,7 @@
 <?php
 
 include('../controller/patient-signup-controller.php');
+header("location: patient-login.php");
 ?>
 
 <head>
@@ -50,6 +51,6 @@ include('../controller/patient-signup-controller.php');
     </form>
 <div>
 <div>
-    <p>Already have an account? <a href="login.php" class="button">Sign in</a></p>
+    <p>Already have an account? <a href="patient-login.php" class="button">Sign in</a></p>
 </div>
 

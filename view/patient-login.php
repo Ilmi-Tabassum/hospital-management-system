@@ -1,8 +1,8 @@
 <?php
-include('../controller/patient-login-controller.php');
+include('../controller/login-controller.php');
 
 if(isset($_SESSION['email'])){
-    header("location: patient-records.php");
+    header("location: patient-panel.php");
 }
 ?>
 
@@ -28,12 +28,14 @@ if(isset($_SESSION['email'])){
 
         <label for="password">Password</label>
         <input type="password" placeholder="Enter Password" name="password" required>
-        <!-- <input name="submit" type="submit" value="LOGIN"> -->
+
+        <input type="hidden" name="role" id="role" value="patient"/>
+
         <button type="submit" input name="submit" type="submit" value="LOGIN">Login</button>
     </div>
     <div>
         <p>If you don't have an account yet, please sign up to create an account first.<p>
-            <a href = "register.php" class="button"> Sign Up </a>
+            <a href = "patient-signup.php" class="button"> Sign Up </a>
     </div>
 
 </form>

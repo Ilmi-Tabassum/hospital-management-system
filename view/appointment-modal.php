@@ -10,7 +10,6 @@ include('../controller/take-appointment.php');
             </div>
             <div class="modal-body">
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-
                     <div class="modal-body">
                         <div class="form-group">
                             <label> Select Appointment Timings </label>

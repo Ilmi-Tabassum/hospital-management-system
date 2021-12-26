@@ -24,7 +24,7 @@ include('../controller/insert-pharma.php')
 </form>
 </div>
 
-<a href="pharmacy.php" class="button">Back</a>
+<a href="pharmacist-panel.php" class="button">Back</a>
 
 </body>
 </html>

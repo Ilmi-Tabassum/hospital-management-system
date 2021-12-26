@@ -72,7 +72,7 @@ $sql = "SELECT * FROM pharmacistdata WHERE email = '$sex'";
 </div>
 <br> </br>
 
-<a href="stock.php" class="button">Edit Medicines</a>
+<a href="pharamacist-stock.php" class="button">Edit Medicines</a>
 
 
 <br> </br>

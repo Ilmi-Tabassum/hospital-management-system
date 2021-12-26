@@ -1,8 +1,8 @@
 <?php
-include('../controller/login-pharamacist-controller.php');
+include('../controller/login-controller.php');
 
 if(isset($_SESSION['email'])){
-header("location: pharmacy.php");
+header("location: pharmacist-panel.php");
 }
 ?>
 
@@ -29,6 +29,8 @@ header("location: pharmacy.php");
     <label for="password">Password</label>
     <input type="password" placeholder="Enter Password" name="password" required>
     <!-- <input name="submit" type="submit" value="LOGIN"> -->
+    <input type="hidden" name="role" id="role" value="pharmacist"/>
+
     <button type="submit" input name="submit" type="submit" value="LOGIN">Login</button>
 </div>
 

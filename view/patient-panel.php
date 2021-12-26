@@ -29,7 +29,6 @@ include('./appointment-modal.php');
             <div class="card-body">
     <center>
         <b>Doctor Records</b>
-
     </center>
     <BR>
     <?php
@@ -39,7 +38,7 @@ include('./appointment-modal.php');
     if ($userQuery->num_rows > 0) {
     echo "<table border='1'>
         <tr>
-        <th> S.No </th>
+        <th>S.No</th>
         <th>Doctor Name</th>
         <th>Email </th>
         <th>Phone Number</th>
