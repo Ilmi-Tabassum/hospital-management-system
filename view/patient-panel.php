@@ -3,7 +3,10 @@
 include('../model/db.php');
 $connection = new db();
 session_start();
-$temp = getPatientIdandName();
+$temp = getIdandName("patientdata","patient_id","pname");
+//$temp is an array,
+// which has the patient id on index 0 and patient name on index 1.
+//the parameters are the table name and the column names.
 $name = $temp[1];
 echo "" . "Welcome," . $name . "<br>";
 include('./appointment-modal.php');
@@ -50,12 +53,12 @@ include('./appointment-modal.php');
 
             echo "<tr>";
 
-            echo "<td>" . $row['id'] . "</td>";
+            echo "<td>" . $row['doctor_id'] . "</td>";
             echo "<td>" . $row['dname'] . "</td>";
             echo "<td>" . $row['email'] . "</td>";
             echo "<td>" . $row['phoneno'] . "</td>";
             echo "<td>" . $row['speciality'] . "</td>";
-            $doctor_id = $row['id'];//id of the doctor
+            $doctor_id = $row['doctor_id'];//id of the doctor
             echo "<td> <a data-toggle='modal' class='open-appointmentModal' href='#appointmentModal' data-id='$doctor_id'> Click me</a> </td>";
 //            echo "<td> <button type='button' class='btn btn-info btn-lg' data-toggle='modal' class='open-exampleModalLong' data-target='#exampleModalLong'  data-id='5666' </button>Appointment</td>";
             echo "</tr>";

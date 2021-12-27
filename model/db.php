@@ -47,7 +47,6 @@ function CloseCon($conn)
 public function insertAppointment($conn, $table, $time, $description, $patient_id, $doctor_id){
 
     $result =$conn->query("INSERT INTO $table (`time`,`description`,`patient_id`, `doctor_id`) VALUES ('$time','$description','$patient_id', '$doctor_id') ");
-
     return $result;
 }
 //7
@@ -61,30 +60,38 @@ function checkExistingEmail( $table, $email){
     else return false;
     }
 
+    function showAppointments($conn, $doctor_id){
+        $result1 = $conn->query("SELECT appointment.* FROM appointment WHERE doctor_id = $doctor_id");
+        $result2 = $conn->query("SELECT patientdata.* FROM patientdata INNER JOIN appointment ON patientdata.patient_id = appointment.patient_id WHERE appointment.doctor_id = $doctor_id");
+        $result = array($result1, $result2);
+        return $result;
+    }
+
 
 }
 
 
 //8
-function getPatientIdandName()
+function getIdandName($table, $id, $name)
 {
     if (!isset($_SESSION['email'])) {
-        echo 'Welcome Guest.';
+        header("location: ../view/home.php"); //if someone is not logged in and tries to use the panel url then
+        // not allowing him to access the panel pages.
     } else {
-        $temp = $_SESSION['email'];
-        $sql = "SELECT * FROM patientdata WHERE email = '$temp'";
+        $session_email = $_SESSION['email'];
+        $sql = "SELECT * FROM $table WHERE email = '$session_email'";
         $connection = new db();
         $conobj = $connection->OpenCon();
         $result = mysqli_query($conobj, $sql);
         while ($row = mysqli_fetch_array($result)) {
-            $patient_id = $row["id"];
-            $patient_name = $row["pname"];
-            $nameAndId=array($patient_id, $patient_name);
+            $found_id = $row["$id"];
+            $found_name = $row["$name"];
+            $nameAndId=array($found_id, $found_name);
         }
 
     }
     return $nameAndId;
 }
-
+//9
 
 ?>
