@@ -8,7 +8,7 @@ if (isset($_POST["submit"])) {
     $time = $_REQUEST["time"];
     $description = $_REQUEST["description"];
     $doctor_id = $_REQUEST["doctor_id"];
-    $temp = $connection->getIdandName("patientdata","patient_id","pname");//also will echo the patient name
+    $temp = getIdandName("patientdata","patient_id","pname");//also will echo the patient name
     $patient_id = $temp[0];
     $connection = new db();
     $conobj = $connection->OpenCon();

@@ -1,9 +1,17 @@
+
+
 <?php
 $connect = mysqli_connect("localhost", "root", "", "hospitalmanagementsystem");
-$query = "SELECT * FROM patientdata ORDER BY id DESC";
+$query = "SELECT * FROM patientdata ORDER BY patient_id DESC";
 $result = mysqli_query($connect, $query);
+include('../model/db.php');
 ?>
 <!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
 <html>
 <head>
     <title>Patient Records</title>
@@ -26,7 +34,7 @@ $result = mysqli_query($connect, $query);
                 <tr>
                     <th width="70%">Patient Name</th>
                     <th width="70%">Phone Number</th>
-                    <th width="15%">Edit</th>
+                    <th width="15%">Delete</th>
                     <th width="15%">View</th>
                 </tr>
                 <?php
@@ -36,9 +44,37 @@ $result = mysqli_query($connect, $query);
                     <tr>
                         <td><?php echo $row["pname"]; ?></td>
                         <td><?php echo $row["phoneno"]; ?></td>
-                        <td><input type="button" name="edit" value="Edit" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs edit_data" /></td>
-                        <td><input type="button" name="view" value="view" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs view_data" /></td>
+<!--                        --><?php
+//                        $connection = new db();
+//                        $conobj=$connection->OpenCon();
+//                        $patient_id = $row['patient_id'];
+//                        $connection->deletePatient($conobj, $patient_id)
+//                        ?>
+                        <td><button type="button" name="delete" value="Delete" id="<?php echo $row["patient_id"]; ?>" > Delete</button>  </td>
+                        <td> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal<?php echo $row['patient_id'] ?>">View</button>  </td>
                     </tr>
+
+
+
+                    <div id="myModal<?php echo $row['patient_id'] ?>" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <button>Patient Details  <type="button" class="close" data-dismiss="modal">&times; </button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <h4>Name : <?php echo $row['pname']; ?></h4>
+                                    <h4>Mobile Number : <?php echo $row['phoneno']; ?></h4>
+                                    <h4>Email : <?php echo $row['email']; ?></h4>
+                                    <h4>Address : <?php echo $row['address']; ?></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <?php
                 }
                 ?>
@@ -72,10 +108,10 @@ $result = mysqli_query($connect, $query);
             </div>
             <div class="modal-body">
                 <form method="post" id="insert_form">
-                    <label>Enter Employee Name</label>
+                    <label>Enter Patient Name</label>
                     <input type="text" name="name" id="name" class="form-control" />
                     <br />
-                    <label>Enter Employee Address</label>
+                    <label>Enter Patient Address</label>
                     <textarea name="address" id="address" class="form-control"></textarea>
                     <br />
                     <label>Select Gender</label>
@@ -84,7 +120,7 @@ $result = mysqli_query($connect, $query);
                         <option value="Female">Female</option>
                     </select>
                     <br />
-                    <label>Enter Designation</label>
+                    <label>Enter Problems</label>
                     <input type="text" name="designation" id="designation" class="form-control" />
                     <br />
                     <label>Enter Age</label>

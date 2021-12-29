@@ -1,7 +1,7 @@
 <?php
 
 include('../controller/patient-signup-controller.php');
-header("location: patient-login.php");
+
 ?>
 
 <head>

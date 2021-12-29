@@ -1,9 +1,10 @@
 <h5>
 <?php
 include('../model/db.php');
+include ('../controller/search-patient.php');
 $connection = new db();
 session_start();
-$temp = getIdandName("patientdata","patient_id","pname");
+$temp = $connection->getIdandName("patientdata","patient_id","pname");
 //$temp is an array,
 // which has the patient id on index 0 and patient name on index 1.
 //the parameters are the table name and the column names.

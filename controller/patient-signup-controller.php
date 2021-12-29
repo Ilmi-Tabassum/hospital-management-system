@@ -34,6 +34,8 @@ if (isset($_POST["submit"])) {
         }
 
         $connection->CloseCon($conobj);
+        header("location: ../view/patient-login.php");
+
     }
 }
 ?>
