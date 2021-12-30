@@ -3,7 +3,7 @@
 include('../controller/login-controller.php');
 
 if(isset($_SESSION['email'])){
-    header("location: demo.php");
+    header("location: admin-records.php");
 }
 ?>
 

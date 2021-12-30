@@ -44,13 +44,12 @@ include('../model/db.php');
                     <tr>
                         <td><?php echo $row["pname"]; ?></td>
                         <td><?php echo $row["phoneno"]; ?></td>
-<!--                        --><?php
-//                        $connection = new db();
-//                        $conobj=$connection->OpenCon();
-//                        $patient_id = $row['patient_id'];
-//                        $connection->deletePatient($conobj, $patient_id)
-//                        ?>
-                        <td><button type="button" name="delete" value="Delete" id="<?php echo $row["patient_id"]; ?>" > Delete</button>  </td>
+
+                    <form method="post" action="../controller/admin-controller.php">
+                        <input type="hidden" name="patient_id" id="patient_id" value="<?php echo $patient_id = $row["patient_id"]; ?>"/>
+                        <td><button type="submit" name="submit"> Delete</button>  </td>
+                    </form>
+
                         <td> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal<?php echo $row['patient_id'] ?>">View</button>  </td>
                     </tr>
 
@@ -135,86 +134,86 @@ include('../model/db.php');
             </div>
         </div>
     </div>
-<script>
-    $(document).ready(function(){
-        $('#add').click(function(){
-            $('#insert').val("Insert");
-            $('#insert_form')[0].reset();
-        });
-        $(document).on('click', '.edit_data', function(){
-            var employee_id = $(this).attr("id");
-            $.ajax({
-                url:"fetch.php",
-                method:"POST",
-                data:{employee_id:employee_id},
-                dataType:"json",
-                success:function(data){
-                    $('#name').val(data.name);
-                    $('#address').val(data.address);
-                    $('#gender').val(data.gender);
-                    $('#designation').val(data.designation);
-                    $('#age').val(data.age);
-                    $('#employee_id').val(data.id);
-                    $('#insert').val("Update");
-                    $('#add_data_Modal').modal('show');
+    <script>
+        $(document).ready(function(){
+            $('#add').click(function(){
+                $('#insert').val("Insert");
+                $('#insert_form')[0].reset();
+            });
+            $(document).on('click', '.edit_data', function(){
+                var employee_id = $(this).attr("id");
+                $.ajax({
+                    url:"fetch.php",
+                    method:"POST",
+                    data:{employee_id:employee_id},
+                    dataType:"json",
+                    success:function(data){
+                        $('#name').val(data.name);
+                        $('#address').val(data.address);
+                        $('#gender').val(data.gender);
+                        $('#designation').val(data.designation);
+                        $('#age').val(data.age);
+                        $('#employee_id').val(data.id);
+                        $('#insert').val("Update");
+                        $('#add_data_Modal').modal('show');
+                    }
+                });
+            });
+            $('#insert_form').on("submit", function(event){
+                event.preventDefault();
+                if($('#name').val() == "")
+                {
+                    alert("Name is required");
+                }
+                else if($('#address').val() == '')
+                {
+                    alert("Address is required");
+                }
+                else if($('#designation').val() == '')
+                {
+                    alert("Designation is required");
+                }
+                else if($('#age').val() == '')
+                {
+                    alert("Age is required");
+                }
+                else
+                {
+                    $.ajax({
+                        url:"insert.php",
+                        method:"POST",
+                        data:$('#insert_form').serialize(),
+                        beforeSend:function(){
+                            $('#insert').val("Inserting");
+                        },
+                        success:function(data){
+                            $('#insert_form')[0].reset();
+                            $('#add_data_Modal').modal('hide');
+                            $('#employee_table').html(data);
+                        }
+                    });
+                }
+            });
+            $(document).on('click', '.view_data', function(){
+                var employee_id = $(this).attr("id");
+                if(employee_id != '')
+                {
+                    $.ajax({
+                        url:"select.php",
+                        method:"POST",
+                        data:{employee_id:employee_id},
+                        success:function(data){
+                            $('#employee_detail').html(data);
+                            $('#dataModal').modal('show');
+                        }
+                    });
                 }
             });
         });
-        $('#insert_form').on("submit", function(event){
-            event.preventDefault();
-            if($('#name').val() == "")
-            {
-                alert("Name is required");
-            }
-            else if($('#address').val() == '')
-            {
-                alert("Address is required");
-            }
-            else if($('#designation').val() == '')
-            {
-                alert("Designation is required");
-            }
-            else if($('#age').val() == '')
-            {
-                alert("Age is required");
-            }
-            else
-            {
-                $.ajax({
-                    url:"insert.php",
-                    method:"POST",
-                    data:$('#insert_form').serialize(),
-                    beforeSend:function(){
-                        $('#insert').val("Inserting");
-                    },
-                    success:function(data){
-                        $('#insert_form')[0].reset();
-                        $('#add_data_Modal').modal('hide');
-                        $('#employee_table').html(data);
-                    }
-                });
-            }
-        });
-        $(document).on('click', '.view_data', function(){
-            var employee_id = $(this).attr("id");
-            if(employee_id != '')
-            {
-                $.ajax({
-                    url:"select.php",
-                    method:"POST",
-                    data:{employee_id:employee_id},
-                    success:function(data){
-                        $('#employee_detail').html(data);
-                        $('#dataModal').modal('show');
-                    }
-                });
-            }
-        });
-    });
-</script>
+    </script>
 
 </div>
-            <a href="../controller/logout.php" class="button">Log Out</a>
+<a href="../controller/logout.php" class="button">Log Out</a>
 
-            </body>
-            </html>
+</body>
+</html>

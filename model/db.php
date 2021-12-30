@@ -101,10 +101,8 @@ class db
 
     function deletePatient($conn, $patient_id)
     {
-        $del = $conn->query("DELETE from patientdata where patient_id = '$patient_id'"); // delete query
+        $del = $conn->query("DELETE from patientdata where patient_id = $patient_id"); // delete query
         return $del;
-
-
     }
 }
 
